@@ -1,4 +1,3 @@
-# NOTE: update this with your service name
 service: notes-app-api
 
 # Use the serverless-webpack plugin to transpile ES6
@@ -16,14 +15,30 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: prod
   region: us-east-1
-  #environment: ${file(env.yml):${self:provider.stage}}
+
+  # Add iam roles to allow lambda function to access dynamodb
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
-  hello:
-    handler: handler.hello
+  # Create a POST /notes endpoint that will invoke the main function
+  # in create.js
+  create:
+    handler: create.main
     events:
       - http:
-          path: hello
-          method: get
+          path: notes
+          method: post
+          cors: true
+          authorizer: aws_iam
