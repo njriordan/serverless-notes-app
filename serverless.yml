@@ -72,3 +72,13 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+  # Create a DELETE /notes/{id} endpoint that will invoke the main function
+  # in delete.js
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
