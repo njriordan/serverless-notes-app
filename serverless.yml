@@ -42,13 +42,23 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
-  # Create a GET /notes endpoint that will invoke the main function
+  # Create a GET /notes/{id} endpoint that will invoke the main function
   # in get.js
   get:
     handler: get.main
     events:
       - http:
           path: notes/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  # Create a GET /notes endpoint that will invoke the main function
+  # in list.js
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
           method: get
           cors: true
           authorizer: aws_iam
