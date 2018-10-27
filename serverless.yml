@@ -62,3 +62,13 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+  # Create a PUT /notes/{id} endpoint that will invoke the main function
+  # in update.js
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
