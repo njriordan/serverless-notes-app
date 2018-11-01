@@ -38,6 +38,7 @@ export default class Login extends Component {
       this.props.history.push("/");
     } catch (e) {
       alert(e.message);
+      this.setState({ isLoading: false });
     }
   }
 
