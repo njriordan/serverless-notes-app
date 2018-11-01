@@ -32,8 +32,6 @@ Amplify.configure({
   }
 });
 
-
-
 ReactDOM.render(
   <Router>
     <App />
