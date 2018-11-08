@@ -15,7 +15,8 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-
+  # Load secret environment variables depending on stage
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 
 provider:
   name: aws
@@ -25,6 +26,7 @@ provider:
 
 environment:
   tableName: ${self:custom.tableName}
+  stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 
 iamRoleStatements:
   - Effect: Allow
