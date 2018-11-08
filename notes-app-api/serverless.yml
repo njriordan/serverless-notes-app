@@ -90,6 +90,16 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+  # Create a POST /billing endpoint that will invoke the main function
+  # in billing.js
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
 resources:
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
