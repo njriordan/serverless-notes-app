@@ -23,10 +23,9 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
-
-environment:
-  tableName: ${self:custom.tableName}
-  stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+  environment:
+    tableName: ${self:custom.tableName}
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 
 iamRoleStatements:
   - Effect: Allow
